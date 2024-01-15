@@ -1,0 +1,272 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "School Management API",
+      "version": "1.0",
+      "description": "API for managing students in a school"
+    },
+    "basePath": "/",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/students": {
+        "post": {
+          "summary": "Add a new student",
+          "description": "Add a new student to the database",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "student",
+              "description": "Student information",
+              "schema": {
+                "$ref": "#/definitions/Student"
+              },
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student added successfully",
+              "schema": {
+                "$ref": "#/definitions/MessageWithId"
+              }
+            }
+          }
+        },
+        "get": {
+          "summary": "Get all students",
+          "description": "Retrieve a list of all students",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/StudentsList"
+              }
+            }
+          }
+        }
+      },
+      "/students/{student_id}": {
+        "get": {
+          "summary": "Get a specific student",
+          "description": "Retrieve information about a specific student",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "student_id",
+              "type": "string",
+              "description": "ID of the student",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/StudentDetails"
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "schema": {
+                "$ref": "#/definitions/Message"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a specific student",
+          "description": "Update information about a specific student",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "student_id",
+              "type": "string",
+              "description": "ID of the student",
+              "required": true
+            },
+            {
+              "in": "body",
+              "name": "student",
+              "description": "Updated student information",
+              "schema": {
+                "$ref": "#/definitions/Student"
+              },
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student updated successfully",
+              "schema": {
+                "$ref": "#/definitions/Message"
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "schema": {
+                "$ref": "#/definitions/Message"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a specific student",
+          "description": "Delete information about a specific student",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "student_id",
+              "type": "string",
+              "description": "ID of the student",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student deleted successfully",
+              "schema": {
+                "$ref": "#/definitions/Message"
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "schema": {
+                "$ref": "#/definitions/Message"
+              }
+            }
+          }
+        }
+      },
+      "/students/search/{name}": {
+        "get": {
+          "summary": "Search students by name",
+          "description": "Retrieve a list of students matching the provided name",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "name",
+              "type": "string",
+              "description": "Name to search for",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/StudentsList"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Student": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "class": {
+            "type": "string"
+          },
+          "div": {
+            "type": "string"
+          },
+          "guardian_name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "age",
+          "dob",
+          "class",
+          "div",
+          "guardian_name",
+          "address"
+        ]
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageWithId": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "student_id": {
+            "type": "string"
+          }
+        }
+      },
+      "StudentDetails": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "$ref": "#/definitions/Student"
+          }
+        }
+      },
+      "StudentsList": {
+        "type": "object",
+        "properties": {
+          "students": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        }
+      }
+    }
+  }
+  

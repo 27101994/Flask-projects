@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local development settings
+.env
+
+# Database
+*.sqlite
+*.db
+
+# Static files
+/static/
+
+# Compiled Python files
+*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Logs
+*.log
+
+# Caches
+__pycache__/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific directories
+.idea/
+.vscode/
+
+# Ignore Flask migration directory
+/migrations/
+
+# Ignore coverage reports
+.coverage
+
+# Ignore environment-specific files
+*.ini
+*.conf
+
+# Ignore generated HTML/CSS/JS files
+*.pywebview_cache/
+*.pywebview-manifest
+
+# Ignore test-related files
+test.db
